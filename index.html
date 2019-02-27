@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A Twin Peaks Quiz App">
+    <title>A Twin Peaks Quiz</title>
+    <!-- styles -->
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <!-- css reset -->
+
+    <!-- fonts -->
+
+    <!-- javascript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script src="datastore.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header role="banner">
+      <ul>
+        <li class="questionTracker">QUESTION: #<span class="questionNumber">0</span> OF 10</li>
+        <li><img src="mylogo" class="logo" alt="logo description"></li>
+        <li class="scoreTracker">SCORE: <span class="score">0</span></li>
+      </ul>
+    </header>
+    <main role="main" id="quiz-body">
+    <div class="start-quiz">
+      <p>READY TO TAKE THE QUIZ?</p>
+          <button type="button" class="start-button">START</button>
+    </div>
+    <div class="questionAnswerForm"></div>
+    </main>
+  </body>
+</html>
