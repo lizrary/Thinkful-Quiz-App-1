@@ -1,19 +1,13 @@
-function alertDatastore(){
-  alert('datastore working');
-}
-
-
-
 const STORE = [
   {
       question: "What animal was found in Pete's percolator?",
       answers: [
-      'a squirrel',
-      'a fish',
-      'a crawdad',
-      'a spider'
+      'squirrel',
+      'fish',
+      'crawdad',
+      'spider'
       ],
-      correctAnswer: 'a fish',
+      correctAnswer: 'fish',
   },
   {
       question: "What was Agent Cooper urged to drink before it cooled?",
@@ -29,11 +23,11 @@ const STORE = [
       question: "What nursery-rhyme-style song did Leland Palmer sing?",
       answers: [
           'Michael Finnegan Begin Again',
-          'Mairzy Dotes',
+          'Mairzy Doats',
           'Itsy Bitsy Spider',
           'Old MacDonald'
       ],
-      correctAnswer: 'Mairzy Dotes',
+      correctAnswer: 'Mairzy Doats',
   },
   {
       question: "What flower symbolized a mysterious case for the FBI agents?",
@@ -106,5 +100,3 @@ const STORE = [
         correctAnswer: 'Leland Palmer/Bob',
     }
   ]
-
-  $(alertDatastore);

@@ -1,4 +1,4 @@
-// 'use strict'; -- does this need to be used? looks like we have 2 global variables to start
+'use strict';
 
 
 // creates questionNumber and score variables, and starts value of each at 0
@@ -9,43 +9,39 @@ let score = 0;
 
 
 function startQuiz () {
-    alert('starting Quiz');
     $('.start-quiz').on('click', '.start-button', function(event) {
         $('.start-quiz').remove();
         $('.questionAnswerForm').css('display', 'block');
         $('.questionNumber').text(1);
-        // renderQuestion();
     })
-    // why does generateQuestion not get called here? 
-    // because it gets called as a function when the page loads?
 }
-
+// (generateQuestion doesn't get called here because it's called automatically when the page loads)
 // listen for click on start button within .start-quiz class
 // .quizStart on('click', 'startbutton', function(event){
     // remove .quizStart, .questionAnswerForm gets change to displayed in the css (from display:none), change .questionNumber to 1 in header
 
 function generateQuestion () {
     if (questionNumber < STORE.length) {
-        return `<div class="question-${questionNumber}">
+        return `
         <h2>${STORE[questionNumber].question}</h2>
         <form class="question-form">
          <fieldset>
           <div class="radioChoices">
           <label class="answerOption">
-          <span>${STORE[questionNumber].answers[0]}</span>
           <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[0]}" required>
-          </label>
+          ${STORE[questionNumber].answers[0]}
+          </label><br>
           <label class="answerOption">
-          <span>${STORE[questionNumber].answers[1]}</span>
           <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[1]}" required>
-          </label>
+          ${STORE[questionNumber].answers[1]}
+          </label><br>
           <label class="answerOption">
-          <span>${STORE[questionNumber].answers[2]}</span>
           <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[2]}" required>
-          </label>
+          ${STORE[questionNumber].answers[2]}
+          </label><br>
           <label class="answerOption">
-          <span>${STORE[questionNumber].answers[3]}</span>
           <input id ="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[3]}" required>
+          ${STORE[questionNumber].answers[3]}
           </label>
           </div>
           <button type="button" class="submitQuestion">SUBMIT</button>
@@ -57,8 +53,8 @@ function generateQuestion () {
     else {
         renderResults();
         restartQuiz()
+        $('.questionNumber').text(10);
     }
-    alert('Generating a question ...');
 }
 // for each question in STORE, renders the html. goes through each question
 // once the function reaches the length of STORE it will instead run the renderResults function and the restartQuiz function
@@ -66,7 +62,6 @@ function generateQuestion () {
 
 function renderQuestion () {
     $('.questionAnswerForm').html(generateQuestion());
-    alert('rendering question');
   }
   // render question in DOM
   // generates the HTML For the question within the class .questionAnswerForm
@@ -83,32 +78,27 @@ function changeScore () {
     score ++;
 }
 // increment score if correct
-// no function needed if incorrect; score should remain unchanged -- so we'll only run this function if the user chooses the correct answer
+// no function needed if incorrect; score should remain unchanged -- so we'll only call this function if the user chooses the correct answer
 
 
 
 
 function userSelectAnswer () {
-    alert('user selecting answer');
     $('form').on('click', '.submitQuestion', function(event) {
       event.preventDefault();
       let selected = $('input:checked');
       let answer = selected.val();
       let correctAnswer = `${STORE[questionNumber].correctAnswer}`;
       if (answer === correctAnswer) {
-        // selected.parent().addClass('correct'); // do we need to add a class here?
         ifAnswerIsCorrect();
-      } else {
-        // selected.parent().addClass('wrong');
+      }
+      else {
         ifAnswerIsWrong();
       }
     });
   }
-//checks to see if the user submitted the correct answer,
-// if correct answer - adds a class to the first parent element (should be the div?) - .correct
-// if wrong answer - adds a class to the first parent element (should be the div?) - .wrong
-// -- what are these classes being used for?
-// -- can't find them in CSS at all
+//listens to a click on a 'submitQuestion' class within a 'form' element
+//checks to see if the user's selected value matches the correct answer in STORE
 //then either runs the ifAnswerIsCorrect function,
 // or the ifAnswerIsWrong function
 
@@ -127,10 +117,10 @@ function userSelectAnswer () {
       $('.questionAnswerForm').html(`
       <div class="correctFeedback">
        <div class="correctImage">
-        <img src="dancingman" alt="description">
+        <img src="assets/dancingman.gif" alt="Dancing Man in the Black Lodge">
        </div>
        <p>CORRECT</p>
-       <button type="button" class="nextButton">NEXT QUESTION</button>
+       <button type="button" class="nextButton">NEXT</button>
        </div>`);
   }
 // .correctAnswer is referencing the element in our STORE array
@@ -141,11 +131,11 @@ function userSelectAnswer () {
       $('.questionAnswerForm').html(`
       <div class="wrongFeedback">
       <div class="wrongImage">
-        <img src="boblaughing" alt="description"></div>
+        <img src="assets/boblaughing.gif" alt="Laughing Bob from Twin Peaks"></div>
         <p>SORRY, THAT'S WRONG</p>
         <p>THE CORRECT ANSWER IS: <span>"${correctAnswer}"</span></p>
-        <button type="button" class="nextButton">NEXT QUESTION</button></div>
-      `);
+        <button type="button" class="nextButton">NEXT</button>
+        </div>`);
   }
 // html here, with correct answer given
 // include next button
@@ -165,9 +155,11 @@ $('.questionAnswerForm').html(`
  <div class="resultsForm">
   <p>THE END ..?</p>
   <div class="finalImage">
-  <img src="bobandcooperlaughing.gif" alt="description">
+  <img src="assets/bobandcooperlaughing.gif" alt="Bob and Cooper laughing">
     </div>
-  <p>YOUR FINAL SCORE: <span>${score}</span> OUT OF 10</p>
+  <p>YOUR FINAL SCORE:
+  <br>
+  ${score} OUT OF 10</p>
   <button type="button" class="restartButton">TRY AGAIN</button>
  </div>
 `
@@ -177,9 +169,8 @@ $('.questionAnswerForm').html(`
 // html for results page goes here
 
 
-//what happens when the user clicks next
+
 function renderNextQuestion () {
-    alert('rendering next question');
     $('main').on('click', '.nextButton', function(event) {
       changeQuestionNumber();
       renderQuestion();

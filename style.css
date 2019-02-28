@@ -1,145 +1,150 @@
 html {
     box-sizing: border-box;
+    height: 100%;
 }
 
 * {
-    font-family: Arial, Helvetica, sans-serif
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
   }
-  
-  header {
-    position: relative;
-    width: 100%;
+
+body {
+    background: url("./assets/twinpeaksbackground1.jpg") no-repeat center;
+    background-size: cover;
+}
+
+header {
+    text-align: center;
+    margin-top: 10px;
+ }
+
+header img {
+    width: 50px;
     height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    /* border: 2px solid red; */
+  }
+
+button {
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      border: transparent;
+      border-radius: 25px;
+      font-size: 1.5em;
   }
   
-  header li {
-    display: inline;
-  }
+.twinPeaks {
+    font-weight: bold;
+    font-family: 'Didact Gothic', sans-serif;
+    color: brown;
+    text-shadow: -1px 0 rgb(15, 247, 15), 0 1px rgb(15, 247, 15), 1px 0 rgb(15, 247, 15), 0 -1px rgb(15, 247, 15);
+    font-size: 26px;
+    letter-spacing: 2px;
+}
   
-  .scoreTracker {
-    position: absolute;
-    right: 10px;
-  }
-  
-  .questionTracker {
-    position: absolute;
-    left: 10px;
-  }
-  
-  .logo {
-    position: absolute;
-    left: 50%;
-  }
-  
-  .start-quiz {
-    border: 1px solid black;
+.start-quiz {
+    border: 1px transparent;
+    border-radius: 25px;
     text-align: center;
     width: 50%;
+    height: 75%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 75px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: rgba(0, 0, 0, 0.5);
   }
   
 
 
-  .start-button {
-    margin-top: 70px;
+.start-button {
+    margin-top: 40px;
     margin-bottom: 10px;
   }
 
 
 
-  /* question answer form should default to display: none, gets "turned on" when user clicks "start quiz" */
+  /* question answer form should default to display: none, gets displayed when user clicks "start quiz" */
 
-  .questionAnswerForm {
+.questionAnswerForm {
       display: none;
-      width: 200px;
-      border: 2px solid black;
+      width: 50%;
+      height: 100%;
+      /* border: 2px solid blue; */
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 25px;
+      border: 1px transparent;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      font-size: 16px;
+
   }
 
-  #questionPage {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	/*background-color: rgba(255, 255, 255, .4);*/
+
+fieldset {
+    border: none;
 }
 
-.question-form {
-
-}
 
 .radioChoices {
-
-}
-
-.answerOption {
-
-}
-
-.answerChoice {
-
+    width: auto;
+    padding-bottom: 30px;
 }
 
 
-.submitQuestion {
-
-}
-
-.nextButton {
-
-}
-
-
-.resultsForm {
-
-}
-
-.restartButton {
-
-}
-
-.correctFeedback {
-
-}
-
-.correctImage {
-
-}
-
-.wrongFeedback {
-
-}
-
-.wrongImage {
-
+.question-form input[type="radio"],
+.question-form input[type="radio"]+label {
+    display: inline-block;
+    width: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 
-
-
-
-
-  /* mobile-first design
-  responsive design */
-
-@media screen and (max-width: 380px) {
-    body {
-        background-color: green;
-    }
+label {
+    cursor: pointer;
 }
-/* this set shouldn't really include anything, should be the default setting of the page */
+
+input {
+    cursor: pointer;
+}
+
+label:hover{
+    border: 1px dotted rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+}
+
+
+.correctImage img, .wrongImage img, .finalImage img {
+    width: 85%;
+}
+
 
 @media screen and (min-width: 768px) {
-    body {
-        background-color: aqua;
-    }
-}
 
-@media screen and (min-width: 1200px) {
-    body {
-        background-color: yellow;
+      header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 30px;
+        padding-bottom: 5%;
+      }
+
+      .correctFeedback img, .wrongFeedback img, .resultsForm img {
+          max-height: 350px;
+      }
+
+      html {
+          font-size: 2.0em;
+          /* thought this would work to scale the font size as the page size increases, but i don't think it's doing anything */
+      }
     }
-}
