@@ -12,6 +12,7 @@ html {
 body {
     background: url("./assets/twinpeaksbackground1.jpg") no-repeat center;
     background-size: cover;
+    min-height: 100%;
 }
 
 header {
