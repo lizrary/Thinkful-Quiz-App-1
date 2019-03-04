@@ -1,10 +1,10 @@
 'use strict';
 
 
-// creates questionNumber and score variables, and starts value of each at 0
+
 let questionNumber = 0;
 let score = 0;
-
+// creates questionNumber and score variables, and starts value of each at 0
 
 
 
@@ -15,36 +15,37 @@ function startQuiz () {
         $('.questionNumber').text(1);
     })
 }
-// (generateQuestion doesn't get called here because it's called automatically when the page loads)
 // listen for click on start button within .start-quiz class
-// .quizStart on('click', 'startbutton', function(event){
-    // remove .quizStart, .questionAnswerForm gets change to displayed in the css (from display:none), change .questionNumber to 1 in header
+// removes the element with the class '.start-quiz'
+// turns on the display for the element with the class '.questionAnswerForm',
+//     which was defaulted to display: none on inital page load
+// changes the text of the element with class '.questionNumber' to 1
 
 function generateQuestion () {
     if (questionNumber < STORE.length) {
         return `
-        <h2>${STORE[questionNumber].question}</h2>
         <form class="question-form">
          <fieldset>
-          <div class="radioChoices">
-          <label class="answerOption">
-          <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[0]}" required>
-          ${STORE[questionNumber].answers[0]}
-          </label><br>
-          <label class="answerOption">
-          <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[1]}" required>
-          ${STORE[questionNumber].answers[1]}
-          </label><br>
-          <label class="answerOption">
-          <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[2]}" required>
-          ${STORE[questionNumber].answers[2]}
-          </label><br>
-          <label class="answerOption">
-          <input id ="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[3]}" required>
-          ${STORE[questionNumber].answers[3]}
-          </label>
-          </div>
-          <button type="button" class="submitQuestion">SUBMIT</button>
+         <legend><h2>${STORE[questionNumber].question}</h2></legend>
+            <div class="radioChoices">
+            <label class="answerOption">
+            <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[0]}" required checked>
+            ${STORE[questionNumber].answers[0]}
+            </label><br>
+            <label class="answerOption">
+            <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[1]}" required>
+            ${STORE[questionNumber].answers[1]}
+            </label><br>
+            <label class="answerOption">
+            <input id="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[2]}" required>
+            ${STORE[questionNumber].answers[2]}
+            </label><br>
+            <label class="answerOption">
+            <input id ="answerChoice" type="radio" name="answerChoice" class="options" value="${STORE[questionNumber].answers[3]}" required>
+            ${STORE[questionNumber].answers[3]}
+            </label>
+            </div>
+            <button type="button" class="submitQuestion">SUBMIT</button>
         </fieldset>
       </form>
     </div>
@@ -56,15 +57,16 @@ function generateQuestion () {
         $('.questionNumber').text(10);
     }
 }
-// for each question in STORE, renders the html. goes through each question
-// once the function reaches the length of STORE it will instead run the renderResults function and the restartQuiz function
+// for each question in STORE, renders the question form html
+// once the function reaches the length of STORE it will instead run the renderResults function and the restartQuiz function, and set the text of '.questionNumber' to 10
 
 
 function renderQuestion () {
     $('.questionAnswerForm').html(generateQuestion());
   }
   // render question in DOM
-  // generates the HTML For the question within the class .questionAnswerForm
+  // runs the generateQuestion function, which generates the HTML
+  //      for the question within the element with the class '.questionAnswerForm'
 
 
 function changeQuestionNumber () {
@@ -97,7 +99,7 @@ function userSelectAnswer () {
       }
     });
   }
-//listens to a click on a 'submitQuestion' class within a 'form' element
+//listens for a click on a 'submitQuestion' class within a 'form' element
 //checks to see if the user's selected value matches the correct answer in STORE
 //then either runs the ifAnswerIsCorrect function,
 // or the ifAnswerIsWrong function
@@ -124,6 +126,7 @@ function userSelectAnswer () {
        </div>`);
   }
 // .correctAnswer is referencing the element in our STORE array
+// adds HTML for a correct answer form, including a "next" button
 
 
   function userAnswerFeedbackWrong () {
@@ -137,9 +140,8 @@ function userSelectAnswer () {
         <button type="button" class="nextButton">NEXT</button>
         </div>`);
   }
-// html here, with correct answer given
+// html here, with correct answer shown to user
 // include next button
-// .nextButton is class for next button
 
 
 
@@ -147,7 +149,8 @@ function userSelectAnswer () {
       changeScore ();
       $('.score').text(score);
       }
-// changes the score in the heading
+// runs the function changeScore (increments the score variable)
+// changes the score text in the page heading
 
 
 function renderResults () {
@@ -165,8 +168,9 @@ $('.questionAnswerForm').html(`
 `
 );
 }
-// renders the results page
-// html for results page goes here
+// renders the HTML for the results page
+// includes user's final score
+// includes "try again" button to direct user to retake the quiz
 
 
 
@@ -178,25 +182,38 @@ function renderNextQuestion () {
     });
   }
   // listens for a click (within the body element) on the .nextButton
-  // runs the changeQuestionNumber function (changes heading text)
+  // runs the changeQuestionNumber function (increments questionNumber variable and
+  //       changes question heading text)
   // runs the renderQuestion function (generates html in questionAnswerForm class)
   // runs the userSelectAnswer function (will check to see if the user submitted the correct answer)
   
-  //restart quiz function - reloads page to start quiz over
+  
   function restartQuiz () {
     $('main').on('click', '.restartButton', function (event) {
       location.reload();
+
+
+      // $('.questionAnswerForm').remove();
+      // $('.start-quiz').css('display', 'block');
+
+
+      // questionNumber = 1;
+      // score = 0;
+      // $('.questionNumber').text(1);
+      // $('.score').text(0);
+      // createQuiz();
     });
   }
   // reloads page
   
-  //run quiz functions
+
   function createQuiz () {
     startQuiz();
     renderQuestion();
     userSelectAnswer();
     renderNextQuestion();
   }
+  // a single function to run 4 other page functions
   
   $(createQuiz);
-  // on page load, runs above function
+  // on page load, runs function createQuiz
